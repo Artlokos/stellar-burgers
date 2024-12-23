@@ -1,5 +1,4 @@
 import { FC, memo } from 'react';
-import { useLocation } from 'react-router-dom';
 import { useState } from 'react';
 
 import { TContainer } from './type';
