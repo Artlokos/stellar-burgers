@@ -22,14 +22,21 @@ import {
   Container
 } from '@components';
 import { useDispatch } from '@store';
-import { getIngredientsThunk, getUserThunk } from '@slices';
+import {
+  getIngredientsThunk,
+  getUserThunk,
+  getUserStateSelector
+} from '@slices';
 import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { Preloader } from '../ui/preloader';
 
 const App = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
-  const locBackground = location.state?.background;
+  const userLoading = useSelector(getUserStateSelector).isLoading;
+  const backgroundLocation = location.state?.background;
 
   useEffect(() => {
     dispatch(getUserThunk());
@@ -39,7 +46,7 @@ const App = () => {
   return (
     <div className={styles.app}>
       <AppHeader />
-      <Routes location={locBackground || location}>
+      <Routes location={backgroundLocation || location}>
         <Route path='/' element={<ConstructorPage />} />
         <Route
           path='/ingredients/:id'
@@ -80,7 +87,7 @@ const App = () => {
         </Route>
         <Route path='*' element={<NotFound404 />} />
       </Routes>
-      {locBackground && (
+      {backgroundLocation && (
         <Routes>
           <Route
             path='/feed/:number'
