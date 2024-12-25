@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import styles from './app-header.module.css';
 import { TAppHeaderUIProps } from './type';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import {
   BurgerIcon,
   ListIcon,
@@ -13,30 +13,31 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => (
   <header className={styles.header}>
     <nav className={`${styles.menu} p-4`}>
       <div className={styles.menu_part_left}>
-        <Link
+        <NavLink
           to='/'
-          style={{ textDecoration: 'none', color: 'inherit', display: 'flex' }}
+          className={({ isActive }) =>
+            isActive ? styles.link_active : styles.link
+          }
         >
           <BurgerIcon type={'primary'} />
           <p className='text text_type_main-default ml-2 mr-10'>Конструктор</p>
-        </Link>
-        <Link
+        </NavLink>
+        <NavLink
           to='/feed'
-          style={{ textDecoration: 'none', color: 'inherit', display: 'flex' }}
+          className={({ isActive }) =>
+            isActive ? styles.link_active : styles.link
+          }
         >
           <ListIcon type={'primary'} />
           <p className='text text_type_main-default ml-2'>Лента заказов</p>
-        </Link>
+        </NavLink>
       </div>
       <div className={styles.logo}>
-        <Link
-          to='/'
-          style={{ textDecoration: 'none', color: 'inherit', display: 'flex' }}
-        >
+        <Link to='/' className={`${styles.link_active}`}>
           <Logo className='' />
         </Link>
       </div>
-      <Link to='/profile' style={{ textDecoration: 'none', color: 'inherit' }}>
+      <Link to='/profile' className={`${(styles.link, styles.link_active)}`}>
         <div className={styles.link_position_last}>
           <ProfileIcon type={'primary'} />
           <p className='text text_type_main-default ml-2'>
