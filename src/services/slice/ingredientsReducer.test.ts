@@ -32,17 +32,6 @@ describe('ингредиент', () => {
         image_mobile: 'https://code.s3.yandex.net/react/code/bun-02-mobile.png',
         image_large: 'https://code.s3.yandex.net/react/code/bun-02-large.png'
       };
-      test('ошибка запроса ингредиентов', () => {
-        const store = setupStore();
-        const error = 'mocked error';
-        store.dispatch({
-          type: getIngredientsThunk.rejected.type,
-          error: { message: error }
-        });
-        const state = store.getState();
-        expect(state.ingredients.isLoading).toBeFalsy();
-        expect(state.ingredients.error).toBe(error);
-      });
       const store = setupStore();
       store.dispatch({
         type: getIngredientsThunk.fulfilled.type,
@@ -52,6 +41,17 @@ describe('ингредиент', () => {
       expect(state.ingredients.isLoading).toBeFalsy();
       expect(state.ingredients.error).toBeNull();
       expect(state.ingredients.ingredients).toEqual(mockedPayload);
+    });
+    test('ошибка запроса ингредиентов', () => {
+      const store = setupStore();
+      const error = 'mocked error';
+      store.dispatch({
+        type: getIngredientsThunk.rejected.type,
+        error: { message: error }
+      });
+      const state = store.getState();
+      expect(state.ingredients.isLoading).toBeFalsy();
+      expect(state.ingredients.error).toBe(error);
     });
   });
 });

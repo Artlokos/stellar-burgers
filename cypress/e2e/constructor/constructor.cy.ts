@@ -17,7 +17,7 @@ describe('Тест конструктора бургеров', () => {
     cy.intercept('GET', `${URL}/ingredients`, {
       fixture: 'ingredients.json'
     }).as('getIngredients');
-    cy.visit('');
+    cy.visit('/');
     cy.wait('@getUser');
   });
   afterEach(() => {

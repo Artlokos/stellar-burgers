@@ -1,12 +1,12 @@
 import { expect, test, describe } from '@jest/globals';
-import { rootReducer } from '@store';
+import { rootReducer } from './store';
 import {
   userInitialState,
   orderInitialState,
   ingredientsInitialState,
   feedInitialState,
   constructorInitialState
-} from '@slices';
+} from './slice';
 
 describe('Тест редьюсера', () => {
   const initialState = {
@@ -14,7 +14,7 @@ describe('Тест редьюсера', () => {
     feed: { ...feedInitialState },
     order: { ...orderInitialState },
     ingredients: { ...ingredientsInitialState },
-    constructorbg: { ...constructorInitialState }
+    burgerConstructor: { ...constructorInitialState }
   };
   test('Тест инициализации редьюсера', () => {
     const action = { type: 'UNKNOW_ACTION' };

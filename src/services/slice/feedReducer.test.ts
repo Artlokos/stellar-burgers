@@ -82,17 +82,6 @@ describe('лента', () => {
         updatedAt: '2024-04-04T10:16:19.994Z',
         number: 37593
       };
-      test('ошибка после запроса ленты', () => {
-        const store = setupStore();
-        const error = 'mocked error';
-        store.dispatch({
-          type: getOrdersThunk.rejected.type,
-          error: { message: error }
-        });
-        const state = store.getState();
-        expect(state.feed.isLoading).toBeFalsy();
-        expect(state.feed.error).toBe(error);
-      });
       const store = setupStore();
       store.dispatch({
         type: getOrdersThunk.fulfilled.type,
@@ -102,6 +91,17 @@ describe('лента', () => {
       expect(state.feed.isLoading).toBeFalsy();
       expect(state.feed.error).toBeNull();
       expect(state.feed.orders).toEqual(mockedPayload);
+    });
+    test('ошибка после запроса ленты', () => {
+      const store = setupStore();
+      const error = 'mocked error';
+      store.dispatch({
+        type: getOrdersThunk.rejected.type,
+        error: { message: error }
+      });
+      const state = store.getState();
+      expect(state.feed.isLoading).toBeFalsy();
+      expect(state.feed.error).toBe(error);
     });
   });
 });

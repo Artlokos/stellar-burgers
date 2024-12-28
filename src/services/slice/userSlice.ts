@@ -8,7 +8,7 @@ import {
   refreshToken,
   forgotPasswordApi,
   resetPasswordApi
-} from '@api';
+} from '../../utils/burger-api';
 
 import type { TRegisterData, TLoginData } from '@api';
 import { TUser } from '@utils-types';
