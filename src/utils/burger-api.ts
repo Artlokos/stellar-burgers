@@ -2,7 +2,7 @@ import { ServerResponse } from 'http';
 import { setCookie, getCookie } from './cookie';
 import { TIngredient, TOrder, TUser } from './types';
 
-const URL = process.env.BURGER_API_URL;
+export const URL = process.env.BURGER_API_URL;
 
 const checkResponse = <T>(res: Response): Promise<T> =>
   res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
